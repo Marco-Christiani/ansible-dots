@@ -1,5 +1,11 @@
 # roles/common/dotfiles.yml
 ---
+- debug:
+    var: {{ xyz }}
+
+- debug:
+    var: {{ dotfiles_repo_url }}
+
 - name: Ensure yadm is installed
   stat:
     path: "/usr/local/bin/yadm"
