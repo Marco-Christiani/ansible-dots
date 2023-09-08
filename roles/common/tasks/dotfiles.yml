@@ -1,8 +1,5 @@
 # roles/common/dotfiles.yml
 ---
-- debug:
-    var: "{{ xyz }}"
-
 - name: Ensure yadm is installed
   stat:
     path: "/usr/local/bin/yadm"
@@ -10,6 +7,6 @@
 
 - name: Clone dotfiles using yadm
   command:
-    cmd: "yadm clone {{ xyz }}"
+    cmd: "yadm clone {{ dotfiles_repo_url }}"
   when: yadm_installed.stat.exists == False
   become: no  # Run as user
