@@ -14,7 +14,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Install curl on Arch Linux
-  yay:
+  pacman:
     name: curl
     state: latest
   when: ansible_os_family == "Archlinux"
