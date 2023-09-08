@@ -9,7 +9,7 @@
 - name: Install Rust
   command: "/tmp/install_rust.sh -y"
   args:
-    creates: "~/.cargo/bin/rustc"
+    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/"
 
 - name: Remove installation script
   file:
