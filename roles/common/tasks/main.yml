@@ -1,0 +1,52 @@
+---
+- name: Install package manager
+  include_tasks: package_manager.yml
+  tags: ['install']
+
+- name: Install Git
+  include_tasks: git.yml
+  tags: ['install']
+
+- name: Install Zsh
+  include_tasks: zsh.yml
+  tags: ['install']
+
+- name: Install Rust
+  include_tasks: rust.yml
+  tags: ['install']
+
+- name: Install Terminal
+  include_tasks: termina.yml
+  tags: ['install']
+
+- name: Install rg
+  include_tasks: rg.yml
+  tags: ['install']
+
+- name: Install Fzf
+  include_tasks: fzf.yml
+  tags: ['install']
+
+- name: Install Tmux
+  include_tasks: tmux.yml
+  tags: ['install']
+
+- name: Install Tpm
+  include_tasks: tpm.yml
+  tags: ['install']
+
+- name: Install Neovim
+  include_tasks: neovim_install.yml
+  tags: ['install']
+
+- name: Update Neovim
+  include_tasks: neovim_update.yml
+  tags: ['update']
+
+- name: Install Yadm
+  include_tasks: yadm.yml
+  tags: ['install']
+
+- name: Yadm Clone Dotfiles
+  include_tasks: dotfiles.yml
+  tags: ['install']
