@@ -13,7 +13,7 @@
   when: ansible_os_family == 'Darwin'
 
 - name: Install ripgrep on Arch
-  yay:
+  pacman:
     name: ripgrep
     state: present
   when: ansible_os_family == 'Archlinux'

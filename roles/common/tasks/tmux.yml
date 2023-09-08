@@ -28,7 +28,7 @@
   when: ansible_os_family != "Archlinux"
 
 - name: Install tmux-git on Arch
-  yay:
+  pacman:
     name: tmux-git
     state: present
   when: ansible_os_family == "Archlinux"

@@ -14,7 +14,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Install Git on Arch Linux
-  yay:
+  pacman:
     name: git
     state: latest
   when: ansible_os_family == "Archlinux"

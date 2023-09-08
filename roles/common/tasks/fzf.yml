@@ -13,7 +13,7 @@
   when: ansible_os_family == 'Darwin'
 
 - name: Install fzf on Arch
-  yay:
+  pacman:
     name: fzf
     state: present
   when: ansible_os_family == 'Archlinux'

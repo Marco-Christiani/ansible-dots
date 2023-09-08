@@ -7,7 +7,7 @@
   when: ansible_os_family == "Debian"
 
 - name: Install zsh (Arch)
-  yay:
+  pacman:
     name: zsh
     state: present
   when: ansible_os_family == "Archlinux"
