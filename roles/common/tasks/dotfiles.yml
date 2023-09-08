@@ -6,7 +6,9 @@
   register: yadm_installed
 
 - name: Clone dotfiles using yadm
-  command:
-    cmd: yadm clone {{ dotfiles_repo_url }}
-  when: yadm_installed.stat.exists == False
-  become: no  # Run as user
+  tasks:
+    - include_vars: vars/vault
+    - command:
+        cmd: yadm clone {{ dotfiles_repo_url }}
+      when: yadm_installed.stat.exists == False
+      become: no  # Run as user

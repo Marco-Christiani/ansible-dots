@@ -53,5 +53,4 @@
 
 - name: Yadm Clone Dotfiles
   include_tasks: dotfiles.yml
-  include_vars: vars/vault
   tags: ['install']
