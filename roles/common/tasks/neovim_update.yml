@@ -5,7 +5,7 @@
   block:
     - name: Remove existing Neovim symlink for Debian
       file:
-        path: ~/.local/bin/nvim
+        path: "{{ lookup('env','HOME') }}/.local/bin/nvim"
         state: absent
 
     - name: Remove existing Neovim extracted directory for Debian

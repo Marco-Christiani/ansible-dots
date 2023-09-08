@@ -3,4 +3,4 @@
 - name: Install Alacritty using cargo
   command: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/cargo install alacritty"
   args:
-    creates: "~/.cargo/bin/alacritty"
+    creates: "{{ lookup('env','HOME') }}/.cargo/bin/alacritty"

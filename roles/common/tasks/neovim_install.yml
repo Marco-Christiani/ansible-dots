@@ -23,7 +23,7 @@
     - name: Symlink Neovim for Debian
       file:
         src: /tmp/nvim-linux64/bin/nvim
-        dest: ~/.local/bin/nvim
+        dest: "{{ lookup('env','HOME') }}/.local/bin/nvim"
         state: link
   when: nvim_installed.rc != 0 and ansible_os_family == 'Debian'
   tags:

@@ -3,6 +3,6 @@
 - name: Install TPM
   git:
     repo: https://github.com/tmux-plugins/tpm.git
-    dest: ~/.tmux/plugins/tpm
+    dest: "{{ lookup('env','HOME') }}/.tmux/plugins/tpm"
     clone: yes
     update: no
