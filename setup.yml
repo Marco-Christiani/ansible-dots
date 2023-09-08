@@ -3,8 +3,7 @@
   become: yes # should prob be no by default later
   vars_files:
     - vars/vault
-  tasks:
-    - include_role:
-        name: common
-      vars_files:
-        - vars/vault
+  roles:
+    - role: common
+      vars:
+        xyz: "{{ dotfiles_repo_url }}"
