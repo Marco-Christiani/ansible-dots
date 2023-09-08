@@ -7,9 +7,10 @@
     mode: '0755'  # Setting execute permissions
 
 - name: Install Rust
+  become: false
   command: "/tmp/install_rust.sh -y"
   args:
-    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/"
+    creates: "{{ lookup('env', 'HOME') }}/.cargo/"
 
 - name: Remove installation script
   file:
