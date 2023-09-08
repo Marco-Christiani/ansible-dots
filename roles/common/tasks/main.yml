@@ -20,7 +20,7 @@
   tags: ['install']
 
 - name: Install Terminal
-  include_tasks: termina.yml
+  include_tasks: terminal.yml
   tags: ['install']
 
 - name: Install rg
