@@ -1,0 +1,20 @@
+# roles/common/tasks/core_utils.yml
+---
+- name: Install curl on MacOS
+  homebrew:
+    name: curl
+    state: latest
+  when: ansible_os_family == "Darwin"
+
+- name: Install curl on Debian/Ubuntu
+  apt:
+    name: curl
+    state: latest
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install curl on Arch Linux
+  yay:
+    name: curl
+    state: latest
+  when: ansible_os_family == "Archlinux"

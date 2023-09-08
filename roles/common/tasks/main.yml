@@ -11,6 +11,10 @@
   include_tasks: zsh.yml
   tags: ['install']
 
+- name: Install Core Utils
+  include_tasks: core_utils.yml
+  tags: ['install']
+
 - name: Install Rust
   include_tasks: rust.yml
   tags: ['install']
