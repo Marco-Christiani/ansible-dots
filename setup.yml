@@ -5,5 +5,5 @@
     - vars/vault
   roles:
     - role: common
-      vars:
-        xyz: "{{ dotfiles_repo_url }}"
+      vars_files:
+        - vars/vault
