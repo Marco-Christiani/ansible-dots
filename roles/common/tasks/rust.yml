@@ -1,6 +1,17 @@
 # roles/common/rust.yml
 ---
+- name: Download Rust installation script
+  get_url:
+    url: "https://sh.rustup.rs"
+    dest: "/tmp/install_rust.sh"
+    mode: '0755'  # Setting execute permissions
+
 - name: Install Rust
-  command: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
+  command: "/tmp/install_rust.sh -y"
   args:
     creates: "~/.cargo/bin/rustc"
+
+- name: Remove installation script
+  file:
+    path: "/tmp/install_rust.sh"
+    state: absent
