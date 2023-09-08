@@ -4,4 +4,6 @@
   vars_files:
     - vars/vault
   roles:
-    - common
+    - role: common
+      vars:
+        dotfiles_repo_url: "{{ dotfiles_repo_url }}"
