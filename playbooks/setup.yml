@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  become: yes
+  vars_files:
+    - vars/vault.yml
+  roles:
+    - common/package_manager
+    - common/zsh
+    - common/yadm
+    - common/rust
+    - common/alacritty
+    - common/ripgrep
+    - common/fzf
+    - common/tpm
+    - common/neovim_install
+    - role: common/neovim_update
+      tags:
+        - update

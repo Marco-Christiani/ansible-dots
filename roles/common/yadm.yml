@@ -1,0 +1,19 @@
+# roles/common/yadm.yml
+---
+- name: Install yadm (Debian)
+  apt:
+    name: yadm
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install yadm (Arch)
+  yay:
+    name: yadm-git
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install yadm (MacOS)
+  homebrew:
+    name: yadm
+    state: present
+  when: ansible_os_family == "Darwin"

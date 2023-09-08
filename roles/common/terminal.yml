@@ -1,0 +1,6 @@
+# roles/common/terminal.yml
+---
+- name: Install Alacritty using cargo
+  command: "/home/{{ ansible_user }}/.cargo/bin/cargo install alacritty"
+  args:
+    creates: "~/.cargo/bin/alacritty"

@@ -1,0 +1,34 @@
+# roles/common/tmux.yml
+---
+- name: Install dependencies for building tmux from source
+  package:
+    name:
+      - autoconf
+      - automake
+      - pkg-config
+      - libevent-dev
+      - libncurses-dev 
+      - git
+    state: present
+  when: ansible_os_family != "Archlinux"
+
+- name: Clone and build tmux from source
+  block:
+    - git:
+        repo: 'https://github.com/tmux/tmux.git'
+        dest: '/tmp/tmux'
+    - shell: |
+        cd /tmp/tmux
+        sh autogen.sh
+        ./configure
+        make
+        sudo make install
+      args:
+        creates: /usr/local/bin/tmux
+  when: ansible_os_family != "Archlinux"
+
+- name: Install tmux-git on Arch
+  yay:
+    name: tmux-git
+    state: present
+  when: ansible_os_family == "Archlinux"

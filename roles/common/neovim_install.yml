@@ -1,0 +1,64 @@
+# roles/common/neovim.yml
+---
+- name: Check if Neovim is already installed
+  command: which nvim
+  register: nvim_installed
+  failed_when: false
+  changed_when: false
+
+# Debian Installation ----------------------------------------------------------
+- name: Install Neovim on Debian
+  block:
+    - name: Download Neovim tarball for Debian
+      get_url:
+        url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        dest: /tmp/nvim-linux64.tar.gz
+
+    - name: Extract Neovim tarball for Debian
+      unarchive:
+        src: /tmp/nvim-linux64.tar.gz
+        dest: /tmp/
+        remote_src: yes
+
+    - name: Symlink Neovim for Debian
+      file:
+        src: /tmp/nvim-linux64/bin/nvim
+        dest: ~/.local/bin/nvim
+        state: link
+  when: nvim_installed.rc != 0 and ansible_os_family == 'Debian'
+  tags:
+    - install
+
+# MacOS Installation -----------------------------------------------------------
+- name: Install Neovim on MacOS
+  block:
+    - name: Download Neovim tarball for MacOS
+      get_url:
+        url: https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz
+        dest: /tmp/nvim-macos.tar.gz
+
+    - name: Remove quarantine attribute (MacOS)
+      command: xattr -c /tmp/nvim-macos.tar.gz
+
+    - name: Extract Neovim tarball for MacOS
+      unarchive:
+        src: /tmp/nvim-macos.tar.gz
+        dest: /tmp/
+        remote_src: yes
+
+    - name: Symlink Neovim for MacOS
+      file:
+        src: /tmp/nvim-macos/bin/nvim
+        dest: /usr/local/bin/nvim
+        state: link
+  when: nvim_installed.rc != 0 and ansible_os_family == 'Darwin'
+  tags:
+    - install
+
+# Arch Installation (using yay) ------------------------------------------------
+- name: Install Neovim on Arch
+  command: yay -S neovim
+  when: nvim_installed.rc != 0 and ansible_os_family == 'Archlinux'
+  tags:
+    - install
+

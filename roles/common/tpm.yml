@@ -1,0 +1,8 @@
+# roles/common/tpm.yml
+---
+- name: Install TPM
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: ~/.tmux/plugins/tpm
+    clone: yes
+    update: no

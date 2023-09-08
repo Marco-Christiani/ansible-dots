@@ -1,0 +1,25 @@
+# roles/common/zsh.yml
+---
+- name: Install zsh (Debian)
+  apt:
+    name: zsh
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install zsh (Arch)
+  yay:
+    name: zsh
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install zsh (MacOS)
+  homebrew:
+    name: zsh
+    state: present
+  when: ansible_os_family == "Darwin"
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ ansible_user }}"
+    shell: /bin/zsh
+

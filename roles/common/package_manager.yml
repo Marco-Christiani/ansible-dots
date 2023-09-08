@@ -1,0 +1,12 @@
+# roles/common/package_manager.yml
+---
+- name: Install Homebrew (MacOS)
+  script: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  when: ansible_os_family == "Darwin"
+
+- name: Install yay (Arch)
+  command: |
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+  when: ansible_os_family == "Archlinux"

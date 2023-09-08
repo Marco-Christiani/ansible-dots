@@ -1,0 +1,19 @@
+# roles/common/fzf.yml
+---
+- name: Install fzf on Debian
+  apt:
+    name: fzf
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Install fzf on macOS
+  homebrew:
+    name: fzf
+    state: present
+  when: ansible_os_family == 'Darwin'
+
+- name: Install fzf on Arch
+  yay:
+    name: fzf
+    state: present
+  when: ansible_os_family == 'Archlinux'

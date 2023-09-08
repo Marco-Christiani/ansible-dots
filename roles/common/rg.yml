@@ -1,0 +1,19 @@
+# roles/common/ripgrep.yml
+---
+- name: Install ripgrep on Debian
+  apt:
+    name: ripgrep
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Install ripgrep on macOS
+  homebrew:
+    name: ripgrep
+    state: present
+  when: ansible_os_family == 'Darwin'
+
+- name: Install ripgrep on Arch
+  yay:
+    name: ripgrep
+    state: present
+  when: ansible_os_family == 'Archlinux'

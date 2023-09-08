@@ -1,0 +1,36 @@
+# roles/common/neovim/neovim_update.yml
+---
+# Debian
+- name: Remove existing Neovim for Debian
+  block:
+    - name: Remove existing Neovim symlink for Debian
+      file:
+        path: ~/.local/bin/nvim
+        state: absent
+
+    - name: Remove existing Neovim extracted directory for Debian
+      file:
+        path: /tmp/nvim-linux64
+        state: absent
+
+    - name: Re-import Debian Installation Tasks
+      import_tasks: neovim_install.yml
+  when: ansible_os_family == 'Debian'
+
+# MacOS
+- name: Remove existing Neovim for MacOS
+  block:
+    - name: Remove existing Neovim symlink for MacOS
+      file:
+        path: /usr/local/bin/nvim
+        state: absent
+
+    - name: Remove existing Neovim extracted directory for MacOS
+      file:
+        path: /tmp/nvim-macos
+        state: absent
+
+    - name: Re-import MacOS Installation Tasks
+      import_tasks: neovim_install.yml
+  when: ansible_os_family == 'Darwin'
+
