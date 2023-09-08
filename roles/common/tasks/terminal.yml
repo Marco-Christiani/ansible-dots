@@ -1,6 +1,15 @@
 # roles/common/terminal.yml
 ---
+- name: Install Alacritty dependencies
+  apt:
+    name: 
+      - pkg-config
+      - libfontconfig-dev
+    state: present
+  when: ansible_os_family == "Debian"
+
 - name: Install Alacritty using cargo
-  command: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/cargo install alacritty"
+  command: "{{ lookup('env','HOME') }}/.cargo/bin/cargo install alacritty"
+  become: false
   args:
     creates: "{{ lookup('env','HOME') }}/.cargo/bin/alacritty"

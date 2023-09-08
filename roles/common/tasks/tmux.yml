@@ -5,10 +5,11 @@
     name:
       - autoconf
       - automake
-      - pkg-config
       - libevent-dev
-      - libncurses-dev 
-      - git
+      - ncurses-dev
+      - build-essential
+      - bison
+      - pkg-config
     state: present
   when: ansible_os_family != "Archlinux"
 
