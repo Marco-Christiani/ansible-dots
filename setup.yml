@@ -6,4 +6,4 @@
   roles:
     - role: common
       vars:
-        dotfiles_repo_url: "{{ dotfiles_repo_url }}"
+        xyz: "{{ dotfiles_repo_url }}"
