@@ -1,6 +1,6 @@
 # roles/common/rust.yml
 ---
 - name: Install Rust
-  command: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+  command: "wget --https-only -O rust-install.sh https://sh.rustup.rs && sh rust-install.sh"
   args:
     creates: "~/.cargo/bin/rustc"
