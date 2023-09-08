@@ -2,8 +2,10 @@
 - hosts: localhost
   become: yes # should prob be no by default later
   vars_files:
-    - vars/vault
+    - vault.yml
   roles:
     - role: common
+      vars_files:
+        - vault.yml
       vars:
         xyz: "{{ dotfiles_repo_url }}"
