@@ -18,3 +18,9 @@
     name: curl
     state: latest
   when: ansible_os_family == "Archlinux"
+
+- name: Install cmake (Debian)
+  apt:
+    name: cmake
+    state: present
+  when: ansible_os_family == "Debian"
