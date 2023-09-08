@@ -1,0 +1,20 @@
+# roles/common/git.yml
+---
+- name: Install Git on MacOS
+  homebrew:
+    name: git
+    state: latest
+  when: ansible_os_family == "Darwin"
+
+- name: Install Git on Debian/Ubuntu
+  apt:
+    name: git
+    state: latest
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install Git on Arch Linux
+  yay:
+    name: git
+    state: latest
+  when: ansible_os_family == "Archlinux"

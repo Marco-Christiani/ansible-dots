@@ -5,14 +5,17 @@
     - vars/vault.yml
   roles:
     - common/package_manager
+    - common/git
     - common/zsh
-    - common/yadm
     - common/rust
-    - common/alacritty
-    - common/ripgrep
+    - common/terminal
+    - common/rg
     - common/fzf
+    - common/tmux
     - common/tpm
     - common/neovim_install
     - role: common/neovim_update
       tags:
         - update
+    - common/yadm
+    - common/dotfiles
