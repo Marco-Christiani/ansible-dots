@@ -47,6 +47,10 @@
   include_tasks: neovim_update.yml
   tags: ['update']
 
+- name: Setup Ssh
+  include_tasks: ssh.yml
+  tags: ['install']
+
 - name: Install Yadm
   include_tasks: yadm.yml
   tags: ['install']

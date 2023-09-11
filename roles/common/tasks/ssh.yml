@@ -1,0 +1,43 @@
+---
+# - name: Set authorized key took from file
+#   authorized_key:
+#     user: "{{ lookup('env', 'USER') }}"
+#     state: present
+#     key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+#   with_fileglob:
+#   - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
+
+- name: Ensure .ssh directory exists
+  file:
+    path: "~/.ssh"
+    state: directory
+    mode: '0700'
+
+- name: Add private SSH key
+  copy:
+    content: "{{ gh_private_ssh_key }}"
+    dest: "~/.ssh/{{ gh_ssh_key_name }}"
+    mode: '0600'
+  no_log: true  # to make sure we don't accidentally print the SSH key in logs
+
+- name: Add public SSH key
+  copy:
+    content: "{{ gh_public_ssh_key }}"
+    dest: "~/.ssh/{{ gh_ssh_key_name }}.pub"
+    mode: '0644'
+  no_log: true
+
+- name: Set up SSH agent
+  shell: |
+    eval $(ssh-agent -s)
+    ssh-add ~/.ssh/id_rsa
+  no_log: true
+
+- name: Ensure SSH known hosts (github.com)
+  known_hosts:
+    name: "{{ item }}"
+    key: "{{ lookup('pipe', 'ssh-keyscan ' + item) }}"
+    state: present
+  loop:
+    - github.com
+
