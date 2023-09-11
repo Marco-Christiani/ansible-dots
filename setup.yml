@@ -7,5 +7,3 @@
     - role: common
       vars_files:
         - vault.yml
-      vars:
-        xyz: "{{ dotfiles_repo_url }}"

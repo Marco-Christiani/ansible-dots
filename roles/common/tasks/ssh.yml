@@ -8,36 +8,48 @@
 #   - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
 
 - name: Ensure .ssh directory exists
+  become: false
   file:
-    path: "~/.ssh"
+    path: "{{ lookup('env','HOME') }}/.ssh"
     state: directory
     mode: '0700'
 
 - name: Add private SSH key
+  become: false
   copy:
     content: "{{ gh_private_ssh_key }}"
-    dest: "~/.ssh/{{ gh_ssh_key_name }}"
+    dest: "{{ lookup('env','HOME') }}/.ssh/{{ gh_ssh_key_name }}"
     mode: '0600'
-  no_log: true  # to make sure we don't accidentally print the SSH key in logs
+  no_log: false  # to make sure we don't accidentally print the SSH key in logs
 
 - name: Add public SSH key
+  become: false
   copy:
     content: "{{ gh_public_ssh_key }}"
-    dest: "~/.ssh/{{ gh_ssh_key_name }}.pub"
+    dest: "{{ lookup('env','HOME') }}/.ssh/{{ gh_ssh_key_name }}.pub"
     mode: '0644'
-  no_log: true
+  no_log: false
+
+- name: Add SSH configuration for GitHub
+  become: false
+  copy:
+    content: |
+      Host github.com
+          IdentityFile "{{ lookup('env','HOME') }}/.ssh/{{ gh_ssh_key_name }}"
+    dest: "{{ lookup('env','HOME') }}/.ssh/config"
+    mode: '0600'
 
 - name: Set up SSH agent
   shell: |
     eval $(ssh-agent -s)
-    ssh-add ~/.ssh/id_rsa
-  no_log: true
+    ssh-add  {{ lookup('env','HOME') }}/.ssh/{{ gh_ssh_key_name }}
+  no_log: false
 
 - name: Ensure SSH known hosts (github.com)
   known_hosts:
     name: "{{ item }}"
     key: "{{ lookup('pipe', 'ssh-keyscan ' + item) }}"
+    path: "{{ lookup('env','HOME') }}/.ssh/known_hosts"
     state: present
   loop:
     - github.com
-

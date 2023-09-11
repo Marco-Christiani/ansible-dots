@@ -18,3 +18,9 @@
     name: git
     state: latest
   when: ansible_os_family == "Archlinux"
+
+- name: Set default Git branch to main
+  become: false
+  command:
+    cmd: "git config --global init.defaultBranch main"
+    warn: false

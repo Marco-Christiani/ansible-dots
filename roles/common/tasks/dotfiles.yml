@@ -7,6 +7,7 @@
 
 - name: Clone dotfiles using yadm
   command:
-    cmd: "yadm clone {{ xyz }}"
+    # force ovewrite any existing boilerplate config files created during a tool's install
+    cmd: "yadm clone {{ dotfiles_repo_url }} -b main -f"
   when: yadm_installed.stat.exists == False
-  become: no  # Run as user
+  become: false

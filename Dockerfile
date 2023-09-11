@@ -32,6 +32,7 @@ COPY . .
 
 # .local/ is standard on real/desktop but not docker
 RUN mkdir -p /home/theprimeagen/.local/bin
+ENV ANSIBLE_PASSWORD_FILE=pass.txt
 
 # CMD ["sh", "-c", "ansible-playbook $TAGS setup.yml"]
-CMD ["bash", "-c", "ansible-playbook setup.yml -i localhost --vault-password-file=pass.txt"]
+CMD ["bash", "-c", "ansible-playbook setup.yml -i localhost"]

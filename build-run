@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -t ansible-test-ubuntu .
+docker run --rm -it --name ansible-ubuntu-container ansible-test-ubuntu $@
