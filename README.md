@@ -7,3 +7,5 @@
 - [ ] starship install
 - [ ] fonts install
 - [ ] Arch: powertop (including systemd service)
+
+ testing
